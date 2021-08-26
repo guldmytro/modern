@@ -1,0 +1,35 @@
+{% extends 'layout/base.html' %}
+
+{% block title %}{{ post.title }}{% endblock %}
+
+{% block breadcrumbs %}
+    {% include 'breadcrumbs.html' %}
+{% endblock %}
+
+{% block content %}
+<main class="single-main">
+    <div class="container">
+        <article class="single-article">
+            <h1 class="single-article__title">{{ post.title }}</h1>
+            <div class="single-article__content">
+                {{ post.content | safe }}
+            </div>
+            <div class="single-article__details">
+                {% if post.updated != post.created %}
+                <p class="single-article__update">
+                    Последнеее обновление: {{ post.updated }}
+                </p>
+                {% endif %}
+                <p class="single-article__created">
+                    Дата создания: <time>{{ post.created | date:'d.m.Y' }}</time>
+                </p>
+                <p>Автор: <span>{% firstof post.author.get_full_name post.author.username %}</span></p>
+            </div>
+        </article>
+        {% include 'blog/related-posts.html' %}
+    </div>
+</main>
+
+{% include 'blog/comments.html' %}
+
+{% endblock %}

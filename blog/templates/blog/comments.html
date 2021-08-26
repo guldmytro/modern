@@ -1,0 +1,64 @@
+{% load static %}
+<section class="single-post__comments">
+    <div class="container">
+        <div class="section-header">
+            <h2 class="section-header__title">Комментарии (<span class="comments__cnt">{{ comments.count }}</span>)</h2>
+        </div>
+        <ul class="comments-group">
+            {% for comment in comments %}
+            <li id="comment-{{ comment.pk }}" class="comment-group__item comment">
+                <div class="comment-wrapper">
+                    <p class="comment__author">
+                        <span>Автор: {{ comment.full_name }}</span>
+                    </p>
+                    <div class="comment__date">
+                        <span>Дата: </span>
+                        <time>{{ comment.publish | date:'d.m.Y' }}</time>
+                    </div>
+                    {% if comment.reply %}
+                        <a href="#comment-{{ comment.reply.pk }}" class="comment__cite">
+                            <p class="comment__author">
+                                <span>От пользователя: {{ comment.reply.full_name }}</span>
+                            </p>
+                            <div class="comment__date">
+                                <span>Дата: </span>
+                                <time>{{ comment.reply.publish | date:'d.m.Y' }}</time>
+                                <p class="comment-content">
+                                    {{ comment.reply.comment | truncatechars:200 }}
+                                </p>
+                            </div>
+                        </a>
+                    {% endif %}
+
+                    <p class="comment-content comment-content_origin">
+                        {{ comment.comment }}
+                    </p>
+
+                    <button class="comment-reply" type="button" data-id="{{ comment.pk }}">Ответить</button>
+                </div>
+            </li>
+            {% endfor %}
+        </ul>
+        <form action="{% url 'blog:comment' %}" class="form-comment">
+            <h3 class="form-comment__title">Оставить комментарий</h3>
+            <div class="replied-message">
+                <button type="button" class="delete-replied-comment" aria-label="Закрыть">
+                    <span></span>
+                </button>
+                <p class="replied-message__text"></p>
+            </div>
+            <div class="form-comment__fields">
+                {% csrf_token %}
+                <input class= type="text" name="name" placeholder="Ваше имя">
+                <input type="text" name="surname" placeholder="Ваша фамилия">
+                <input type="hidden" name="reply" value="">
+                <input type="hidden" name="post" value="{{ post.pk }}">
+                <textarea name="msg" cols="30" rows="10" placeholder="Коментарий" required value="test"></textarea>
+                <button type="submit">
+                    <span>Опубликовать</span>
+                    <img src="{% static 'img/arrow-right-dark.svg' %}" alt="стрелка">
+                </button>
+            </div>
+        </form>
+    </div>
+</section>

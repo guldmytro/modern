@@ -1,0 +1,76 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=no">
+    <title>{% block title %}Главная{% endblock %} - ModernGIS</title>
+    <link rel="icon" type="image/png" href="{% static 'img/favicon.png' %}">
+    <link rel="stylesheet" href="{% static 'css/main.css' %}">
+</head>
+<body>
+    <div class="wrapper">
+
+        <div class="content">
+            <header class="header">
+                <div class="container">
+                    <div class="header__row">
+                        <div class="mobile-menu">
+                            <button type="button" aria-label="Открыть мобильное меню">
+                                <span></span>
+                                <span></span>
+                                <span></span>
+                                <span></span>
+                                <span></span>
+                                <span></span>
+                                <span></span>
+                                <span></span>
+                                <span></span>
+                            </button>
+                            <ul class="header__menu_mobile">
+                                <li{% if post_type == 'archive' %} class="active"{% endif %}><a href="{% url 'blog:archive_blog' %}">Статьи</a></li>
+                                <li{% if post_type == 'about' %} class="active"{% endif %}><a href="{% url 'pages:about' %}">Об авторе</a></li>
+                                <li{% if post_type == 'feadback' %} class="active"{% endif %}><a href="{% url 'pages:feadback' %}">Обратная связь</a></li>
+                            </ul>
+                        </div>
+
+                        <a href="{% url 'pages:home' %}" class="header__logo">
+                            <img src="{% static 'img/logo.svg' %}" alt="логотип">
+                        </a>
+                        <div class="header__menu-search">
+                            <ul class="header__menu">
+                                <li{% if post_type == 'archive' %} class="active"{% endif %}><a href="{% url 'blog:archive_blog' %}">Статьи</a></li>
+                                <li{% if post_type == 'about' %} class="active"{% endif %}><a href="{% url 'pages:about' %}">Об авторе</a></li>
+                                <li{% if post_type == 'feadback' %} class="active"{% endif %}><a href="{% url 'pages:feadback' %}">Обратная связь</a></li>
+                            </ul>
+                            <form class="header__form header-form" action="{% url 'blog:search' %}" method="GET">
+                                <input type="text" class="header-form__input" name="query"{% if request.GET.query %} value="{{ request.GET.query }}"{% endif %}>
+                                <button type="submit" aria-label="искать"><img src="{% static 'img/search.svg' %}" alt="поиск"></button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </header>
+
+            {% block breadcrumbs %} {% endblock %}
+
+            {% block content %} {% endblock %}
+
+        </div>
+        <!-- /.content -->
+
+        <footer class="footer">
+            <div class="container">
+                <p class="footer__copy">
+                    <img src="{% static 'img/copy.svg' %}" alt="знак копирования">
+                    <span>Все права защищены</span>
+                </p>
+            </div>
+        </footer>
+    </div>
+    <!-- /.wrapper -->
+    <script src="{% static 'js/jquery.min.js' %}"></script>
+    <script src="{% static 'js/main.js' %}"></script>
+</body>
+</html>

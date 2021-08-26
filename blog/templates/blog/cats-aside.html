@@ -1,0 +1,9 @@
+<aside class="cats-aside">
+    <ul class="cats-aside-group">
+        {% for tag in tags %}
+            <li class="cats-aside-group__item{% if tag.slug == current_tag %} active{% endif %}">
+                <a href="{{ tag.get_absolute_url }}">{{ tag.title }}</a>
+            </li>
+        {% endfor %}
+    </ul>
+</aside>

@@ -1,0 +1,16 @@
+{% load static %}
+<div class="related-posts__pagination">
+    <nav class="pagination">
+        {% if page.has_previous %}
+            <a class="pagi-prev" href="?page={{ page.previous_page_number }}" aria-label="Предыдущая страница">
+                <img src="{% static 'img/arrow-right.svg' %}" alt="стрелка">
+            </a>
+        {% endif %}
+        <span>{{ page.number }}</span>
+        {% if page.has_next %}
+            <a class="pagi-next" href="?page={{ page.next_page_number }}" aria-label="Следующая страница">
+                <img src="{% static 'img/arrow-right.svg' %}" alt="стрелка">
+            </a>
+        {% endif %}
+    </nav>
+</div>

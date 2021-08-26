@@ -1,0 +1,14 @@
+{% extends 'layout/base.html' %}
+
+{% block title %}{{page_name}}{% endblock %}
+
+{% block breadcrumbs %}
+    {% include 'breadcrumbs.html' %}
+{% endblock %}
+
+{% block content %}
+
+
+{% include 'blog/latest.html' %}
+
+{% endblock %}

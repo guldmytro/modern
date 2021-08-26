@@ -1,0 +1,43 @@
+{% extends 'layout/base.html' %}
+{% load static %}
+
+{% block title %}{{page_name}}{% endblock %}
+
+{% block breadcrumbs %}
+    {% include 'breadcrumbs.html' %}
+{% endblock %}
+
+
+{% block content %}
+<main class="about-main">
+    <div class="container">
+        <div class="section-header">
+            <h1 class="section-header__title">
+                {{ page_name }}
+            </h1>
+        </div>
+
+        <div class="about-text">
+            <p class="author-name">
+                {{ page.name }}
+            </p>
+            <div class="about-img">
+                <img src="{{ page.thumbnail.url }}" alt="{{ page.name }}">
+            </div>
+
+            <h2 class="author-subtitle">
+                {{ page.excerpt }}
+            </h2>
+
+            <div class="about-content">
+                {{ page.content | safe }}
+            </div>
+
+
+        </div>
+
+
+
+    </div>
+</main>
+{% endblock %}

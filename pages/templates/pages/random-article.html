@@ -1,0 +1,24 @@
+{% load static %}
+{% if posts %}
+    <section class="random-article">
+        <div class="container">
+            {% for post in posts %}
+                <div class="random-article__info">
+                    <h2 class="random-article__title">{{ post.title }}</h2>
+                    <p class="random-article__desc">
+                        {{ post.excerpt }}
+                    </p>
+                    <a class="link link_border" href="{{ post.get_absolute_url }}">
+                        <span>Читать статью</span>
+                        <img src="{% static 'img/arrow-right.svg' %}" alt="стрелка">
+                    </a>
+                </div>
+                {% if post.thumbnail %}
+                    <div class="random-article__thumb">
+                        <img src="{{ post.thumbnail.url }}" alt="картинка">
+                    </div>
+                {% endif %}
+            {% endfor %}
+        </div>
+    </section>
+{% endif %}

@@ -1,0 +1,47 @@
+{% if latest_posts or page_name == "Поиск" %}
+<section class="latest latest_secondary">
+    <div class="container">
+        <div class="section-header">
+            <h2 class="section-header__title">
+                {% if search_header %}
+                    {{ search_header | safe }}
+                {% else %}
+                    Новое на форуме
+                {% endif %}
+            </h2>
+        </div>
+        {% if latest_posts %}
+        <ul class="latest-group">
+            {% for post in latest_posts %}
+            <li class="latest-group__item latest-item">
+                <div class="latest-item__thumb">
+                    <img src="{{ post.thumbnail.url }}" alt="{{ post.title }}">
+                </div>
+                <div class="latest-item__info">
+                    <h3 class="latest-item__title">
+                        <a href="{{ post.get_absolute_url }}">{{ post.title }}</a>
+                    </h3>
+                    <p class="latest-item__excerpt">
+                        {{ post.excerpt|truncatechars:165 }}
+                    </p>
+                    <div class="latest-item__controls">
+                        {% if post.category %}
+                        <a href="{{ post.category.get_absolute_url }}" class="latest-item__term">
+                            {{ post.category.title }}
+                        </a>
+                        {% endif %}
+                        <time class="latest-item__date">{{ post.publish | date:'d.m.Y' }}</time>
+                    </div>
+                </div>
+                <p class="latest-item__excerpt__mobile">
+                    {{ post.excerpt|truncatechars:165 }}
+                </p>
+            </li>
+            {% endfor %}
+        </ul>
+        {% else %}
+            <p>По вашему запросу статтей не найдено...</p>
+        {% endif %}
+    </div>
+</section>
+{% endif %}

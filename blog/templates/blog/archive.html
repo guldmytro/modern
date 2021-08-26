@@ -1,0 +1,46 @@
+{% extends 'layout/base.html' %}
+
+{% block title %}{{page_name}}{% endblock %}
+
+{% block breadcrumbs %}
+    {% include 'breadcrumbs.html' %}
+{% endblock %}
+
+{% block content %}
+<main class="cats-main">
+    <div class="container">
+        <div class="section-header">
+            <h1 class="section-header__title">
+                {{ page_name }}
+            </h1>
+        </div>
+        <div class="cats-main-wrapper">
+            {% include 'blog/cats-aside.html' %}
+
+            <div class="related-posts-wrapper">
+                <ul class="related-posts">
+                    {% for post in posts %}
+                        <li class="related-posts__item related-post">
+                            <div class="related-post__img">
+                                <img src="{{ post.thumbnail.url }}" alt="пост">
+                            </div>
+                            <div class="related-post__info">
+                                <h2 class="related-post__title"><a href="{{ post.get_absolute_url }}">{{ post.title }}</a></h2>
+                                <time class="related-post__date">{{ post.publish | date:'d.m.Y' }}</time>
+                            </div>
+                        </li>
+                    {% endfor %}
+                </ul>
+                {% if posts.paginator.num_pages > 1 %}
+                    {% include 'blog/pagination.html' with page=posts %}
+                {% endif %}
+            </div>
+
+        </div>
+        </div>
+    </div>
+</main>
+
+{% include 'blog/latest.html' %}
+
+{% endblock %}

@@ -1,0 +1,38 @@
+{% extends 'layout/base.html' %}
+
+{% load static %}
+
+{% block title %}{{page_name}}{% endblock %}
+
+{% block breadcrumbs %}
+    {% include 'breadcrumbs.html' %}
+{% endblock %}
+
+{% block content %}
+    <main class="main-feadback">
+        <div class="container">
+            <div class="feadback__row">
+                <div class="feadback__img">
+                    <img src="{% static 'img/feadback.png' %}" alt="мозг">
+                </div>
+                <form action="{% url 'pages:send_message' %}" class="feadback-form">
+                    <div class="section-header">
+                        <h1 class="section-header__title">
+                            Возникли вопросы или предложения?
+                        </h1>
+                    </div>
+                    <div class="feadback-form__fields">
+                        {% csrf_token %}
+                        <input type="text" name="name" required placeholder="Ваше имя">
+                        <input type="email" name="email" required placeholder="Ваш e-mail">
+                        <textarea name="comment" cols="30" rows="10" placeholder="Ваш комментарий"></textarea>
+                        <button type="submit">
+                            <span>Отправить</span>
+                            <img src="{% static 'img/arrow-right-dark.svg' %}" alt="стрелка">
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </main>
+{% endblock %}

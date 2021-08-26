@@ -1,0 +1,38 @@
+{% extends 'layout/base.html' %}
+
+{% load static %}
+
+{% block content %}
+<main class="banner">
+    <div class="container">
+        <div class="banner__row">
+            <div class="stages">
+                <div class="stages__item"></div>
+                <div class="stages__item"></div>
+                <div class="stages__item"></div>
+                <div class="stages__item active"></div>
+                <div class="stages__item"></div>
+            </div>
+            <div class="banner__video-box">
+                <video class="banner__video" autoplay muted loop>
+                    <source src="{% static 'video/Globe - 5925.mp4' %}" type="video/mp4">
+                </video>
+            </div>
+            <div class="banner__header">
+                <h1 class="banner__header_title">ArcGis Pro</h1>
+                <a class="link link_border" href="{% url 'blog:archive_blog' %}">
+                    <span>Смотреть все категории</span>
+                    <img src="{% static 'img/arrow-right.svg' %}" alt="стрелка">
+                </a>
+            </div>
+        </div>
+    </div>
+</main>
+
+{% include 'blog/latest.html' %}
+
+{% include 'pages/main-terms.html' %}
+
+{% include 'pages/random-article.html' with posts=random_article %}
+
+{% endblock %}

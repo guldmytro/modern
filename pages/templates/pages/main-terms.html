@@ -1,0 +1,30 @@
+{% load static %}
+{% if tags %}
+    <section class="terms-section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-header__title">Категории</h2>
+                <div class="section-header__controls">
+                    <button class="term-arrow prev" type="button" class="предыдущий слайд">
+                        <img src="{% static 'img/arrow-right-big.svg' %}" alt="стрелка">
+                    </button>
+                    <button class="term-arrow next" type="button" class="следующий слайд">
+                        <img src="{% static 'img/arrow-right-big.svg' %}" alt="стрелка">
+                    </button>
+                </div>
+            </div>
+            <ul class="terms-group" data-index="1">
+                {% for tag in tags %}
+                    <li class="terms-group__item term-item">
+                        <a href="{{ tag.get_absolute_url }}">
+                            <div class="term-item__thumb">
+                                <img src="{{ tag.thumbnail.url }}" alt="{{ tag.title }}">
+                            </div>
+                            <h3 class="term-item__title">{{ tag.title }}</h3>
+                        </a>
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </section>
+{% endif %}

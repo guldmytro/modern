@@ -1,0 +1,12 @@
+{% if related_posts %}
+    <aside class="single-aside">
+        <h2 class="single-aside__title">Статьи с категории</h2>
+        <ul class="single-aside__group">
+            {% for related_post in related_posts %}
+                <li class="single-aside__article">
+                    <a href="{{ related_post.get_absolute_url }}">{{ related_post.title }}</a>
+                </li>
+            {% endfor %}
+        </ul>
+    </aside>
+{% endif %}

@@ -1,0 +1,13 @@
+<div class="breadcrums">
+    <div class="container">
+        <a href="{% url 'pages:home' %}">Главная</a>
+        {% if post or current_tag %}
+            <a href="{% url 'blog:archive_blog' %}">Статьи</a>
+            {% if post.category %}
+                <a href="{{ post.category.get_absolute_url }}">{{ post.category.title }}</a>
+            {% endif %}
+        {% endif %}
+        <span>{{ page_name }}</span>
+    </div>
+
+</div>
